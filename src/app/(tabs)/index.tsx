@@ -7,6 +7,8 @@ import { Notification } from "../../components/notification";
 import { CreditCard } from "../../components/credit-card";
 import { ListTransactions } from "../../components/list-transactions";
 import { ListApplets } from "../../components/list-applets";
+import { Balance } from "../../components/balance";
+import { SliderCreditCard } from "../../components/slider-credit-card";
 
 const statusBarHeight = Constants.statusBarHeight;
 
@@ -24,7 +26,9 @@ export default function Index() {
         <Profile uri="https://github.com/LeoAlvarenga404.png" />
         <Notification />
       </View>
-      <CreditCard color={"#4e54c8"} type="visa" validad="19/27" />
+      <Balance />
+      <SliderCreditCard />
+      {/* <CreditCard color={"#4e54c8"} type="visa" validad="19/27" /> */}
       <View
         style={{
           display: "flex",
@@ -36,7 +40,7 @@ export default function Index() {
       </View>
       <ListTransactions />
 
-      <StatusBar style='light' />
+      <StatusBar style="light" />
     </ScrollView>
   );
 }
@@ -49,6 +53,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 20,
-    marginBottom: 50
+    marginBottom: 50,
   },
 });

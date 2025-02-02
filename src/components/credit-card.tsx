@@ -30,16 +30,43 @@ export function CreditCard({ type, color, validad }: CreditCardProps) {
             }}
           >
             <Image
-              source={require("../../assets/contact-indicator.png")}
-              style={[styles.logo, { width: 30, height: 30 }]}
+              source={require("../../assets/chip.png")}
+              style={[styles.logo, { width: 40, height: 50 }]}
             />
             <Image
-              source={require("../../assets/chip.png")}
-              style={[styles.logo, { width: 50, height: 50 }]}
+              source={require("../../assets/contact-indicator.png")}
+              style={[styles.logo, { width: 20, height: 20 }]}
             />
           </View>
-          <View>
-            <Text style={styles.number}>**** **** **** 5432</Text>
+          <Text style={styles.number}>**** **** **** 5432</Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: 4,
+              marginLeft: 80,
+            }}
+          >
+            <Text style={{ fontSize: 8, color: "#fff" }}>VALID{"\n"}THRU</Text>
+            <Text style={{ color: "#fff" }}>{validad}</Text>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={styles.holder}>LEONARDO PRADO</Text>
+            <Image
+              source={
+                type === "visa"
+                  ? require("../../assets/visa-logo.png")
+                  : require("../../assets/mastercard-logo.png")
+              }
+              style={[styles.logo, { width: 70, height: 70 }]}
+            />
           </View>
         </View>
       </LinearGradient>
@@ -75,10 +102,20 @@ const styles = StyleSheet.create({
 
   number: {
     fontSize: 23,
-    fontWeight: "bold",
+    fontWeight: "300",
     color: "#ffffff",
     textShadowColor: "#1d1d1d",
     textShadowOffset: { width: 3, height: 3 },
+    textShadowRadius: 1,
+    fontFamily: "monospace",
+  },
+
+  holder: {
+    fontSize: 14,
+    fontWeight: "300",
+    color: "#ffffff",
+    textShadowColor: "#1d1d1d",
+    textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 1,
     fontFamily: "monospace",
   },
