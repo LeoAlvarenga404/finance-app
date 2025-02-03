@@ -36,7 +36,8 @@ export default function Index() {
         <Profile uri="https://github.com/LeoAlvarenga404.png" />
         <View style={{ display: "flex", flexDirection: "row", gap: 6 }}>
           <ToggleTheme />
-          <Notification />
+          {/* <Notification /> */} 
+          
           <Logout />
         </View>
       </View>
@@ -65,6 +66,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 20,
-    marginBottom: 50,
+    paddingBottom: 80,
   },
 });
