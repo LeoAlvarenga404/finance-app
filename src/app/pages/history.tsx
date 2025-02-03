@@ -1,10 +1,11 @@
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function History() {
-  
+  const { theme } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Text style={{ color: "#fff" }}>History</Text>
     </View>
   );

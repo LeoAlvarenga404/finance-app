@@ -18,8 +18,8 @@ export function Balance() {
     <View style={styles.container}>
       <View style={styles.balanceContainer}>
         <Text style={{ fontSize: 12, color: theme.text }}>Balance</Text>
-        <Text style={{ fontSize: viewBalance ? 15 : 20, color: theme.text }}>
-          {viewBalance ? balance : "$ ******"}
+        <Text style={{ fontSize: 15, color: theme.text }}>
+          {viewBalance ? balance : "******"}
         </Text>
       </View>
       <Ionicons

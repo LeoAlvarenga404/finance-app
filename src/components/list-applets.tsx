@@ -12,7 +12,7 @@ export function ListApplets() {
     },
     {
       color: theme.primary,
-      icon: "logo-bitcoin" as "logo-bitcoin",
+      icon: "logo-usd" as "logo-usd",
       url: "/currency-converter",
       title: "Converter",
     },
