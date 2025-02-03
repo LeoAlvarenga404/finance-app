@@ -15,7 +15,7 @@ export const darkTheme = {
   text: "#ffffff",
   label: "#c4c4cc",
 
-  background: "#0c0a0f",
+  background: "#0d0b0f",
 
   income: "#a6dd4c",
   outcome: "#df6868",

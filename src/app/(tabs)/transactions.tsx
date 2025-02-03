@@ -1,2 +1,2 @@
-import Transactions from "../pages/transactions";
+import Transactions from '../pages/transactions'
 export default Transactions

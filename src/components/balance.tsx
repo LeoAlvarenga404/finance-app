@@ -18,16 +18,18 @@ export function Balance() {
     <View style={styles.container}>
       <View style={styles.balanceContainer}>
         <Text style={{ fontSize: 12, color: theme.text }}>Balance</Text>
-        <Text style={{ fontSize: 15, color: theme.text }}>
-          {viewBalance ? balance : "$ ******"}
-        </Text>
+        <View style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 20 }}>
+          <Text style={{ fontSize: viewBalance ? 15 : 20, color: theme.text }}>
+            {viewBalance ? balance : "$ ******"}
+          </Text>
+          <Ionicons
+            name={viewBalance ? "eye" : "eye-off"}
+            size={24}
+            color={theme.text}
+            onPress={() => setViewBalance(!viewBalance)}
+          />
+        </View>
       </View>
-      <Ionicons
-        name={viewBalance ? "eye" : "eye-off"}
-        size={24}
-        color={theme.text}
-        onPress={() => setViewBalance(!viewBalance)}
-      />
     </View>
   );
 }

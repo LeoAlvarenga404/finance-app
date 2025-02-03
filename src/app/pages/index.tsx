@@ -11,6 +11,7 @@ import { Balance } from "../../components/balance";
 import { SliderCreditCard } from "../../components/slider-credit-card";
 import { ToggleTheme } from "../../components/toggle-theme";
 import { useTheme } from "../../hooks/useTheme";
+import { Logout } from "@/components/logout";
 
 const statusBarHeight = Constants.statusBarHeight;
 
@@ -18,7 +19,12 @@ export default function Index() {
   const { theme } = useTheme();
 
   return (
-    <ScrollView contentContainerStyle={[styles.container, { backgroundColor: theme.background }]}>
+    <ScrollView
+      contentContainerStyle={[
+        styles.container,
+        { backgroundColor: theme.background },
+      ]}
+    >
       <View
         style={{
           display: "flex",
@@ -31,6 +37,7 @@ export default function Index() {
         <View style={{ display: "flex", flexDirection: "row", gap: 6 }}>
           <ToggleTheme />
           <Notification />
+          <Logout />
         </View>
       </View>
       <Balance />

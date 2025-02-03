@@ -1,11 +1,13 @@
-import { Slot } from "expo-router";
 import { ThemeProvider } from "../contexts/theme-context";
-import {} from "../hooks/useTheme";
+import { AuthProvider } from "@/contexts/auth-context";
+import AuthRoutes from "./routes/auth-routes";
 
 export default function Layout() {
   return (
-    <ThemeProvider>
-      <Slot />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <AuthRoutes />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }

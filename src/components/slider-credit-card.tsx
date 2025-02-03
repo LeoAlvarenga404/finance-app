@@ -9,8 +9,8 @@ export function SliderCreditCard() {
 
   const data = [
     { color: "#4e54c8", type: "visa", validad: "19/27" },
-    { color: "#4e54c0", type: "mastercard", validad: "12/25" },
-    { color: "#4e54c0", type: "visa", validad: "10/23" },
+    { color: "#3adbd3", type: "mastercard", validad: "12/25" },
+    { color: "#d60fa4", type: "visa", validad: "10/23" },
   ];
 
   function renderItem(item: any, index: number) {

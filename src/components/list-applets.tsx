@@ -1,7 +1,6 @@
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import { Applets } from "@/components/applets";
 import { useTheme } from "@/hooks/useTheme";
-
 export function ListApplets() {
   const { theme } = useTheme();
   const applets = [
@@ -13,15 +12,15 @@ export function ListApplets() {
     },
     {
       color: theme.primary,
-      icon: "bar-chart" as "bar-chart",
-      url: "/investments",
-      title: "Investments",
+      icon: "logo-bitcoin" as "logo-bitcoin",
+      url: "/currency-converter",
+      title: "Converter",
     },
     {
       color: theme.primary,
       icon: "cash" as "cash",
-      url: "/pages/bills",
-      title: "Bills",
+      url: "/pages/loans",
+      title: "Loans",
     },
     {
       color: theme.primary,
