@@ -1,5 +1,11 @@
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
+import { ThemeProvider } from "../contexts/theme-context";
+import {} from "../hooks/useTheme";
 
 export default function Layout() {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <ThemeProvider>
+      <Slot />
+    </ThemeProvider>
+  );
 }

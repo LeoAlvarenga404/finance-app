@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Teste() {
+export default function Settings() {
   return (
     <View style={styles.container}>
-      <Text>Teste</Text>
+      <Text style={{color: '#fff'}}>Settings</Text>
     </View>
   );
 }
@@ -11,8 +11,9 @@ export default function Teste() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f0f0aa",
+    padding: 20,
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
   },
-});
+})

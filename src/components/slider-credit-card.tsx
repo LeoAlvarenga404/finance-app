@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
-import { CreditCard } from "./credit-card";
-import { FlatList, Dimensions, StyleSheet, View } from "react-native";
-
-const { width: viewportWidth } = Dimensions.get("window");
+import React, { useState } from "react";
+import { CreditCard } from "@/components/credit-card";
+import { ScrollView, Dimensions, StyleSheet, View } from "react-native";
+import { useTheme } from "@/hooks/useTheme";
 
 export function SliderCreditCard() {
+  const { theme } = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const data = [
@@ -13,19 +13,19 @@ export function SliderCreditCard() {
     { color: "#4e54c0", type: "visa", validad: "10/23" },
   ];
 
-  function renderItem({ item }: { item: any }) {
+  function renderItem(item: any, index: number) {
     return (
-      <View style={styles.cardContainer}>
+      <View key={index} style={styles.cardContainer}>
         <CreditCard {...item} />
       </View>
     );
   }
 
-  const onViewRef = useRef(({ viewableItems }: any) => {
-    setActiveIndex(viewableItems[0].index);
-  });
-
-  const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 });
+  function handleScroll(event: any) {
+    const contentOffsetX = event.nativeEvent.contentOffset.x;
+    const index = Math.round(contentOffsetX / Dimensions.get("window").width);
+    setActiveIndex(index);
+  }
 
   function renderDots() {
     return (
@@ -45,7 +45,7 @@ export function SliderCreditCard() {
               width: 8,
               height: 8,
               borderRadius: 4,
-              backgroundColor: activeIndex === index ? "#fff" : "#ccc",
+              backgroundColor: activeIndex === index ? theme.text : theme.label,
             }}
           />
         ))}
@@ -55,17 +55,17 @@ export function SliderCreditCard() {
 
   return (
     <View>
-      <FlatList
+      <ScrollView
         style={{ marginLeft: -8 }}
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled
-        viewabilityConfig={viewConfigRef.current}
-        onViewableItemsChanged={onViewRef.current}
-      />
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+        nestedScrollEnabled
+      >
+        {data.map((item, index) => renderItem(item, index))}
+      </ScrollView>
       {renderDots()}
     </View>
   );

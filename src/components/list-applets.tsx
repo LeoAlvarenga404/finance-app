@@ -1,28 +1,30 @@
 import { View, FlatList, StyleSheet, Text } from "react-native";
-import { Applets } from "./applets";
+import { Applets } from "@/components/applets";
+import { useTheme } from "@/hooks/useTheme";
 
 export function ListApplets() {
+  const { theme } = useTheme();
   const applets = [
     {
-      color: "#4e54c8",
+      color: theme.primary,
       icon: "wallet" as "wallet",
       url: "/pages/wallet",
       title: "Wallet",
     },
     {
-      color: "#4e54c0",
+      color: theme.primary,
       icon: "bar-chart" as "bar-chart",
       url: "/investments",
       title: "Investments",
     },
     {
-      color: "#4e54c0",
+      color: theme.primary,
       icon: "cash" as "cash",
       url: "/pages/bills",
       title: "Bills",
     },
     {
-      color: "#4e54c0",
+      color: theme.primary,
       icon: "card" as "card",
       url: "/pages/cards",
       title: "Cards",
@@ -30,7 +32,7 @@ export function ListApplets() {
   ];
   return (
     <View style={styles.container}>
-      <Text style={{ color: "#fff", fontWeight: "500", fontSize: 20 }}>
+      <Text style={{ color: theme.text, fontWeight: "500", fontSize: 20 }}>
         Quick Access
       </Text>
       <FlatList

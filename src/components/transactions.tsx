@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "@/hooks/useTheme";
 
 interface TransactionProps {
   type: "income" | "outcome" | string;
@@ -16,13 +17,15 @@ export function Transaction({
   value,
   date,
 }: TransactionProps) {
-    const formattedValue = Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(value);
+  const formattedValue = Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(value);
+
+  const { theme } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.secondary }]}>
       <View style={styles.leftContent}>
         <Ionicons
           name={
@@ -31,36 +34,34 @@ export function Transaction({
               : "arrow-down-circle-outline"
           }
           size={30}
-          color={type === "income" ? "#a6dd4c" : "#df6868"}
+          color={type === "income" ? theme.income : theme.outcome}
         />
         <View>
-          <Text style={{ color: "white", fontSize: 15 }}>{title}</Text>
-          <Text style={{ color: "#ffffff90" }}>{description}</Text>
+          <Text style={{ color: theme.text, fontSize: 15 }}>{title}</Text>
+          <Text style={{ color: theme.label }}>{description}</Text>
         </View>
       </View>
       <View style={{ alignItems: "flex-end" }}>
         <Text
           style={[
             styles.value,
-            { color: type === "income" ? "#a6dd4c" : "#df6868" },
+            { color: type === "income" ? theme.income : theme.outcome },
           ]}
         >
           {type === "income" ? `+${formattedValue}` : `-${formattedValue}`}
         </Text>
-        <Text style={styles.date}>{date}</Text>
+        <Text style={[styles.date, { color: theme.label }]}>{date}</Text>
       </View>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     padding: 20,
-    backgroundColor: "#1f1e25",
-    borderRadius: 8,
+    borderRadius: 12,
     marginBottom: 8,
   },
   leftContent: {
@@ -69,7 +70,6 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   date: {
-    color: "#c4c4cc",
     fontSize: 12,
   },
   value: {

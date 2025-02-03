@@ -1,7 +1,8 @@
 import { FlatList, StyleSheet, View, Text } from "react-native";
-import { Transaction } from "./transactions";
+import { Transaction } from "@/components/transactions";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import { useTheme } from "@/hooks/useTheme";
 export function ListTransactions() {
   const transactions = [
     {
@@ -70,6 +71,8 @@ export function ListTransactions() {
     },
   ];
 
+  const { theme } = useTheme();
+
   return (
     <View style={styles.container}>
       <View
@@ -80,26 +83,18 @@ export function ListTransactions() {
           alignItems: "center",
         }}
       >
-        <Text style={{ color: "#fff", fontWeight: "500", fontSize: 20 }}>
-        Transaction History
+        <Text style={{ color: theme.text, fontWeight: "500", fontSize: 20 }}>
+          Transaction History
         </Text>
         <Link href={"../(tabs)/history"}>
-          <Ionicons name="arrow-forward-outline" size={20} color="#fff" />
+          <Ionicons name="arrow-forward-outline" size={20} color={theme.text} />
         </Link>
       </View>
-      <FlatList
-        data={transactions.slice(0, 3)}
-        renderItem={({ item }) => (
-          <Transaction
-            title={item.title}
-            description={item.description}
-            type={item.type}
-            value={item.value}
-            date={item.date}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-      />
+      <View>
+        {transactions.slice(0, 3).map((transaction) => (
+          <Transaction key={transaction.id} {...transaction} />
+        ))}
+      </View>
     </View>
   );
 }
@@ -107,7 +102,6 @@ export function ListTransactions() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0c0a0f",
     padding: 0,
     display: "flex",
     flexDirection: "column",

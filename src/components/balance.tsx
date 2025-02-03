@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
+import { useTheme } from "@/hooks/useTheme";
 
 export function Balance() {
   const [viewBalance, setViewBalance] = useState<boolean>(true);
+  const { theme } = useTheme();
 
   let value = 4500.5;
 
@@ -15,15 +17,15 @@ export function Balance() {
   return (
     <View style={styles.container}>
       <View style={styles.balanceContainer}>
-        <Text style={[styles.text, { fontSize: 12 }]}>Balance</Text>
-        <Text style={[styles.text, { fontSize: 15 }]}>
+        <Text style={{ fontSize: 12, color: theme.text }}>Balance</Text>
+        <Text style={{ fontSize: 15, color: theme.text }}>
           {viewBalance ? balance : "$ ******"}
         </Text>
       </View>
       <Ionicons
         name={viewBalance ? "eye" : "eye-off"}
         size={24}
-        color="#fff"
+        color={theme.text}
         onPress={() => setViewBalance(!viewBalance)}
       />
     </View>
@@ -41,8 +43,5 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 2,
-  },
-  text: {
-    color: "#fff",
   },
 });

@@ -1,11 +1,13 @@
 import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "@/hooks/useTheme";
 
 export function Notification() {
+  const { theme } = useTheme();
   return (
     <View>
-      <Ionicons name="notifications" size={20} color="white" />
-      <View style={styles.ball}></View>
+      <Ionicons name="notifications" size={20} color={theme.text} />
+      <View style={[styles.ball, { backgroundColor: theme.outcome, borderColor: theme.background }]}></View>
     </View>
   );
 }
@@ -15,12 +17,10 @@ const styles = StyleSheet.create({
     width: 11,
     height: 11,
     borderRadius: 99,
-    backgroundColor: "#ff0000",
     position: "absolute",
     top: 0,
     right: 0,
-    borderWidth: 2,
-    borderColor: "#0c0a0f",
+    borderWidth: 1,
     borderStyle: "solid",
   },
 });
