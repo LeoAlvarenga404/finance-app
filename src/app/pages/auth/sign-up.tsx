@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/hooks/useTheme";
 import { Link, router } from "expo-router";
 import {
@@ -13,10 +15,30 @@ const width = Dimensions.get("window").width;
 
 export default function SignUp() {
   const { theme } = useTheme();
+  const { register } = useAuth();
 
-  function SignUp() {
-    console.log("sign up");
-    router.back();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  async function handleSignUp() {
+    if (!email || !password || !confirmPassword) {
+      console.error("Preencha todos os campos!");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      console.error("As senhas não são iguais!");
+      return;
+    }
+
+    try {
+      await register(name, email, password);
+      router.replace("/");
+    } catch (error) {
+      console.error("Erro ao criar conta:", error);
+    }
   }
 
   return (
@@ -25,6 +47,8 @@ export default function SignUp() {
       <View style={styles.inputWrapper}>
         <TextInput
           placeholder="Name"
+          value={name}
+          onChangeText={setName}
           style={[
             styles.input,
             { borderColor: theme.label, color: theme.text },
@@ -33,6 +57,8 @@ export default function SignUp() {
         />
         <TextInput
           placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
           style={[
             styles.input,
             { borderColor: theme.label, color: theme.text },
@@ -41,6 +67,8 @@ export default function SignUp() {
         />
         <TextInput
           placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry={true}
           style={[
             styles.input,
@@ -50,6 +78,8 @@ export default function SignUp() {
         />
         <TextInput
           placeholder="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
           secureTextEntry={true}
           style={[
             styles.input,
@@ -57,11 +87,14 @@ export default function SignUp() {
           ]}
           placeholderTextColor={theme.label}
         />
-        <TouchableOpacity onPress={SignUp}>
+        <TouchableOpacity onPress={handleSignUp}>
           <View style={[styles.button, { backgroundColor: theme.primary }]}>
-            <Text style={{ color: theme.text }}>Sign Up</Text>
+            <Text style={{ color: theme.text }}>Create Account</Text>
           </View>
         </TouchableOpacity>
+        <Link href="/pages/auth/sign-in" style={{ color: theme.outcome }}>
+          Already have an account? Sign In
+        </Link>
       </View>
     </View>
   );

@@ -1,4 +1,6 @@
+import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/hooks/useTheme";
+import { useUser } from "@/hooks/useUser";
 import { StyleSheet, View, Image, Text } from "react-native";
 
 interface ProfileProps {
@@ -6,15 +8,15 @@ interface ProfileProps {
 }
 
 export function Profile({ uri }: ProfileProps) {
-  const name = "Leonardo";
   const { theme } = useTheme();
+  const { user } = useUser();
 
   return (
     <View style={styles.container}>
       <Image source={{ uri: uri }} style={styles.image} />
       <View>
         <Text style={{ color: theme.label, fontSize: 14, fontWeight: "300" }}>
-          Hello {name},
+          Hello {user?.displayName},
         </Text>
         <Text style={{ color: theme.text, fontSize: 24, fontWeight: "500" }}>
           Welcome back

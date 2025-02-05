@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/hooks/useTheme";
 import { Link, router } from "expo-router";
@@ -9,19 +10,32 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const width = Dimensions.get("window").width;
 
 export default function SignIn() {
   const { theme } = useTheme();
   const { login } = useAuth();
+  const auth = getAuth();
 
-  function handleLogin() {
-    console.log("sign in");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-    if (login) {
-      login();
-      router.replace("/");
+  async function handleLogin() {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (login) {
+        login({ email, password });
+        router.replace("/");
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -31,6 +45,8 @@ export default function SignIn() {
       <View style={styles.inputWrapper}>
         <TextInput
           placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
           style={[
             styles.input,
             { borderColor: theme.label, color: theme.text },
@@ -39,6 +55,8 @@ export default function SignIn() {
         />
         <TextInput
           placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry={true}
           style={[
             styles.input,
